@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-// import Appointment from '../models/Appointment';
+import ProdutosGabiq from '../models/ProdutosGabiq';
 
 const AppDataSource = new DataSource({
     type: 'postgres',
@@ -7,9 +7,9 @@ const AppDataSource = new DataSource({
     username: 'postgres',
     password: 'alexla@1',
     port: 5432,
-    database: 'gostack_gobarber',
-    // migrations: ['./src/database/migrations/**/*{.ts,.js}'],
-    // entities: [Appointment, User],
+    database: 'ChicaGleice',
+    migrations: ['./src/database/migrations/**/*{.ts,.js}'],
+    entities: [ProdutosGabiq],
 });
 
 export default AppDataSource;
