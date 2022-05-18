@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import helloWorldRouter from './helloWorld.routes';
+import produtos from './produtos.routes';
 
 const routes = Router();
 
-routes.use('/helloworld', helloWorldRouter);
+routes.use('/produtos', produtos);
 
 export default routes;

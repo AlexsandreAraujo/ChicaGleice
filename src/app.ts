@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import routes from './routes';
 import AppError from './errors/AppError';
+import ProdutosGabiqService from './services/produtos/gabiq';
 
 const app = express();
 
@@ -24,5 +25,21 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
         message: 'Internal Server Error',
     });
 });
+
+// atualiza o banco de dados
+const delay = 60000;
+
+setTimeout(function request() {
+    const date = new Date();
+    if (
+        date.getHours() > 7 &&
+        date.getHours() < 22 &&
+        date.getMinutes() === 0
+    ) {
+        const produtosGabiq = new ProdutosGabiqService();
+        produtosGabiq.execute();
+    }
+    setTimeout(request, delay);
+}, delay);
 
 export default app;

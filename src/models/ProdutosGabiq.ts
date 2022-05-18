@@ -9,11 +9,14 @@ import {
 
 @Entity('produtos_gabiq')
 class ProdutosGabiq extends BaseEntity {
-    @PrimaryGeneratedColumn('identity')
+    @PrimaryGeneratedColumn('increment')
     id: number;
 
     @Column()
     product_id: number;
+
+    @Column()
+    category: string;
 
     @Column()
     name: string;
@@ -25,10 +28,13 @@ class ProdutosGabiq extends BaseEntity {
     image_url: string;
 
     @Column()
-    tamanho: string;
+    option0: string;
 
     @Column()
-    cor: string;
+    option1: string;
+
+    @Column()
+    option2: string;
 
     @Column()
     preco: number;
