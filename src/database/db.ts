@@ -9,7 +9,7 @@ const AppDataSource = new DataSource({
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     port: 5432,
-    migrations: ['./src/database/migrations/**/*{.ts,.js}'],
+    migrations: [process.env.MIGRATION_PATCH],
     entities: [ProdutosGabiq],
 });
 
