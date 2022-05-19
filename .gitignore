@@ -26,4 +26,4 @@ tmp/*
 !tmp/.gitkeep
 
 .env
-dist/*
+/dist
