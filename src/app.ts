@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import routes from './routes';
 import AppError from './errors/AppError';
+import 'express-async-errors';
 import ProdutosGabiqService from './services/produtos/gabiq';
 
 const app = express();

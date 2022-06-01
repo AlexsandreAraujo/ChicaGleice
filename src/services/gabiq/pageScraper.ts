@@ -43,7 +43,7 @@ class ScraperObject {
 
             await newPage.goto(categoria.url);
 
-            await newPage.waitForTimeout(1000);
+            await newPage.waitForTimeout(2000);
 
             let produtosCategoria = await newPage.evaluate(() => {
                 // pegar todas as informações dos produtos
@@ -130,8 +130,6 @@ class ScraperObject {
                 sku: item.sku,
                 stock: item.stock,
             }));
-
-            return produtosCategoria;
         });
 
         const produtos = await Promise.all(pagePromise).then(results => {
