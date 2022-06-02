@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import ProdutosGabiq from '../models/ProdutosGabiq';
+import ProdutosChicaGleice from '../models/ProdutosChicaGleice';
 import 'dotenv/config';
 
 const AppDataSource = new DataSource({
@@ -10,7 +11,7 @@ const AppDataSource = new DataSource({
     database: process.env.DB_NAME,
     port: 5432,
     migrations: [process.env.MIGRATION_PATCH],
-    entities: [ProdutosGabiq],
+    entities: [ProdutosGabiq, ProdutosChicaGleice],
 });
 
 export default AppDataSource;

@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
-import routes from './routes';
-import AppError from './errors/AppError';
 import 'express-async-errors';
+import routes from './routes';
 import ProdutosGabiqService from './services/produtos/gabiq';
+import AppError from './errors/AppError';
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
         });
     }
 
-    console.log('err');
+    console.log(err);
 
     return response.status(500).json({
         status: 'error',
