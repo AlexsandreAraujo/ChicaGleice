@@ -134,14 +134,14 @@ produtosRouter.post('/executecapture', async (request, response) => {
 });
 
 produtosRouter.post('/insertproduct', async (request, response) => {
-    const ids = request.body;
+    const product_id = request.body;
 
-    if (ids === null) {
+    if (product_id === null) {
         throw new AppError('A propiedade product_id não pode ser nula', 400);
     }
 
     const produtos = await ProdutosGabiq.findBy({
-        id: In(ids),
+        product_id: In(product_id),
         // eslint-disable-next-line
         // @ts-ignore
         available: Equal(true),
@@ -151,11 +151,41 @@ produtosRouter.post('/insertproduct', async (request, response) => {
         throw new AppError('A Busca não retornou resultados', 400);
     }
 
+    const produtosChicaGleice = await ProdutosChicaGleice.find();
+
+    const distinctProdutos = produtos.reduce((result, x) => {
+        const findproduct = result.find(
+            y =>
+                y.product_id === x.product_id &&
+                y.option0 === x.option0 &&
+                y.option1 === x.option1,
+        );
+        if (!findproduct) {
+            result.push(x);
+        }
+        return result;
+    }, []);
+
+    const insertProdutos = distinctProdutos.reduce((result, x) => {
+        const findproduct = produtosChicaGleice.find(
+            y =>
+                y.product_id === x.product_id &&
+                y.option0 === x.option0 &&
+                y.option1 === x.option1,
+        );
+        if (!findproduct) {
+            result.push(x);
+        }
+        return result;
+    }, []);
+
     const produtosChicaGleiceRepository =
         AppDataSource.getRepository(ProdutosChicaGleice);
 
     const createdCapture = produtosChicaGleiceRepository.create(
-        produtos.map(a => ({
+        // eslint-disable-next-line
+        // @ts-ignore
+        insertProdutos.map(a => ({
             category: a.category,
             name: a.name,
             available: a.available,
