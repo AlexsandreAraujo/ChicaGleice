@@ -1,6 +1,6 @@
 import Scraper from '../scraping/scraping';
 
-class produtosGabiqService {
+class CaptureGabiqProductsService {
     public execute() {
         const url = 'https://www.gabiq.com.br/';
         const execu = new Scraper();
@@ -8,4 +8,4 @@ class produtosGabiqService {
     }
 }
 
-export default produtosGabiqService;
+export default CaptureGabiqProductsService;

@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import routes from './routes';
-import ProdutosGabiqService from './services/produtos/gabiq';
+import CaptureGabiqProdutosService from './services/products/captureGabiqProductsService';
 import AppError from './errors/AppError';
 
 const app = express();
@@ -37,7 +37,7 @@ setTimeout(function request() {
         date.getHours() < 22 &&
         date.getMinutes() === 0
     ) {
-        const produtosGabiq = new ProdutosGabiqService();
+        const produtosGabiq = new CaptureGabiqProdutosService();
         produtosGabiq.execute();
     }
     setTimeout(request, delay);
